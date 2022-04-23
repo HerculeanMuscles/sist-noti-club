@@ -39,11 +39,11 @@ class _MainState extends State<Main>{
         },
       items: const [
         BottomNavigationBarItem(
-          icon: Icon(Icons.chat),
+          icon: Icon(Icons.people_outline_rounded),
           label: 'Club',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.person),
+          icon: Icon(Icons.notifications_rounded),
           label: 'Notifications',
         ),
       ],
