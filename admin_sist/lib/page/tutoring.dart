@@ -16,7 +16,7 @@ class _TutorsState extends State<Tutors> {
   @override
   Widget build(BuildContext context) {
     return Card(
-        margin: const EdgeInsets.all(20),
+        margin: const EdgeInsets.fromLTRB(10,10,10,10),
         color: const Color.fromRGBO(34, 38, 60, 1),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
@@ -58,7 +58,7 @@ class _TutorsState extends State<Tutors> {
                   ),
                 )),
             Container(
-              margin: const EdgeInsets.fromLTRB(0, 0, 0, 30),
+              margin: const EdgeInsets.fromLTRB(0, 0, 0, 20),
             ),
           ],
         )

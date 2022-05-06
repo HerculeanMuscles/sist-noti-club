@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'page/event_page.dart';
 import 'page/tutor_page.dart';
 
-void main() => runApp(MaterialApp(
+void main() => runApp(const MaterialApp(
   home: Main(),
 ));
 
 class Main extends StatefulWidget {
+  const Main({Key? key}) : super(key: key);
+
   @override
   _MainState createState() => _MainState();
 }

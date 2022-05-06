@@ -16,7 +16,7 @@ class _EventState extends State<Event> {
   @override
   Widget build(BuildContext context) {
     return Card(
-        margin: const EdgeInsets.all(20),
+        margin: const EdgeInsets.fromLTRB(10,10,10,10),
         color: const Color.fromRGBO(34, 38, 60, 1),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
@@ -28,7 +28,7 @@ class _EventState extends State<Event> {
             Image(image: AssetImage(/*Insert image*/ widget.imageurl), fit: BoxFit.fill, height: 200,
             ),
             Container(
-              padding: EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(10.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

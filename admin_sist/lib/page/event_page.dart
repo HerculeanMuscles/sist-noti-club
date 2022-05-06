@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:admin_sist/page/events.dart';
 
@@ -25,10 +24,18 @@ class _EventPageState extends State<EventPage> {
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Event(title: "Fes", date: "25 March", imageurl: "assets/fes.jpg",
+            ElevatedButton(onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  primary: const Color.fromRGBO(120, 121, 241, 1),
+                  padding: const EdgeInsets.symmetric(horizontal: 90, vertical: 12),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                ),),
+                child: const Text('Create a new event')),
+            const Event(title: "Fes", date: "25 March", imageurl: "assets/fes.jpg",
                 description: "Lorem ipsum is a name for a common type of placeholder text. Also known as filler or dummy text, this is simply text copy that serves to fill a space without actually saying anything meaningful. It's essentially nonsense text that still gives an idea of what real words will look like in the final product."
             ),
-            Event(title: "Marrakech", date: "24 Oct", imageurl: "assets/marrakech.jpg",
+            const Event(title: "Marrakech", date: "24 Oct", imageurl: "assets/marrakech.jpg",
                 description: "Lorem ipsum is a name for a common type of placeholder text. Also known as filler or dummy text, this is simply text copy that serves to fill a space without actually saying anything meaningful. It's essentially nonsense text that still gives an idea of what real words will look like in the final product."
             )
           ],
