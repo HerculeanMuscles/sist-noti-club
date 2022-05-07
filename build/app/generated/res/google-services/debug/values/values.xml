@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">229799390492-238qse12fov8nqcpvajdsh0dg8nrvbm9.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">229799390492</string>
+    <string name="google_api_key" translatable="false">AIzaSyC8tdU6Sl__x7JPsGF9340fjAAKKtViu90</string>
+    <string name="google_app_id" translatable="false">1:229799390492:android:147f4c97a84a9eefe01ed9</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyC8tdU6Sl__x7JPsGF9340fjAAKKtViu90</string>
+    <string name="google_storage_bucket" translatable="false">admin-sist-connect.appspot.com</string>
+    <string name="project_id" translatable="false">admin-sist-connect</string>
+</resources>

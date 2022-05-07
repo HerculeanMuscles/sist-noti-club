@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "229799390492",
+    "project_id": "admin-sist-connect",
+    "storage_bucket": "admin-sist-connect.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:229799390492:android:147f4c97a84a9eefe01ed9",
+        "android_client_info": {
+          "package_name": "com.example.admin_sist"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "229799390492-238qse12fov8nqcpvajdsh0dg8nrvbm9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8tdU6Sl__x7JPsGF9340fjAAKKtViu90"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "229799390492-238qse12fov8nqcpvajdsh0dg8nrvbm9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
