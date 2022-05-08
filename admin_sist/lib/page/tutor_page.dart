@@ -1,4 +1,3 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:admin_sist/page/tutoring.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -22,39 +21,63 @@ class _TutorPageState extends State<TutorPage> {
   title: const Text('Tutoring'),
   backgroundColor: const Color.fromRGBO(19, 22, 41, 1),
   ),
-    body: ListView(
-      children: <Widget>[
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            ElevatedButton(onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const TutorForm()),
-              );
-            },
-                style: ElevatedButton.styleFrom(
-                  primary: const Color.fromRGBO(120, 121, 241, 1),
-                  padding: const EdgeInsets.symmetric(horizontal: 90, vertical: 12),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                  ),),
-                child: const Text('Create tutoring event')),
-            const Tutors(title: "Science", time: "25 Dec - 26 Nov",
-                description: "Lorem ipsum is a name for a common type of placeholder text. Also known as filler or dummy text, this is simply text copy that serves to fill a space without actually saying anything meaningful. It's essentially nonsense text that still gives an idea of what real words will look like in the final product."),
-            const Tutors(title: "Math", time: "25 Dec - 26 Nov",
-                description: "Lorem ipsum is a name for a common type of placeholder text. Also known as filler or dummy text, this is simply text copy that serves to fill a space without actually saying anything meaningful. It's essentially nonsense text that still gives an idea of what real words will look like in the final product."),
-            const Tutors(title: "Physical", time: "25 Dec - 26 Nov",
-                description: "Lorem ipsum is a name for a common type of placeholder text. Also known as filler or dummy text, this is simply text copy that serves to fill a space without actually saying anything meaningful. It's essentially nonsense text that still gives an idea of what real words will look like in the final product."),
-            const Tutors(title: "Home Edu", time: "25 Dec - 26 Nov",
-                description: "Lorem ipsum is a name for a common type of placeholder text. Also known as filler or dummy text, this is simply text copy that serves to fill a space without actually saying anything meaningful. It's essentially nonsense text that still gives an idea of what real words will look like in the final product."),
+    body: Column(
+      children: [
+        ElevatedButton(onPressed: () {
+  Navigator.push(
+  context,
+  MaterialPageRoute(builder: (context) => const TutorForm()),
+  );
+  },
+      style: ElevatedButton.styleFrom(
+        primary: const Color.fromRGBO(120, 121, 241, 1),
+        padding: const EdgeInsets.symmetric(horizontal: 90, vertical: 12),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30.0),
+        ),),
+      child: const Text('Create tutoring event')),
+        Flexible(
+          child: StreamBuilder<List<Tutor>>(
+            stream: readTutor(),
+            builder: (context, snapshot) {
 
-          ],
+              if (snapshot.hasError) {
+                return Text('Something is wrong! ${snapshot.error}');
+              }
+              else if (snapshot.hasData) {
+                final tutors = snapshot.data!;
+                return ListView(
+                  children:
+                  tutors.map(buildTutor).toList(),
+
+                );
+            }
+              else {
+                return const Center(child: CircularProgressIndicator(),);
+              }
+          }
+          ),
         ),
       ],
     ),
   )
   );
+  Widget buildTutorB(Tutor tutor) => ListTile(
+    leading: Text(tutor.title),
+    title: Text(tutor.date),
+    subtitle: Text(tutor.description),
+  );
+
+  Widget buildTutor(Tutor tutor) => Tutors(
+      title: tutor.title, date: tutor.date,
+      description: tutor.description);
+
+  Stream<List<Tutor>> readTutor() => FirebaseFirestore.instance
+      .collection("tutoring")
+      .snapshots()
+      .map((snapshot) =>
+      snapshot.docs.map((doc) => Tutor.fromJson(doc.data())).toList());
+
 }
 
 class TutorForm extends StatefulWidget {
@@ -151,7 +174,7 @@ class _TutorFormState extends State<TutorForm> {
                       final tutor = Tutor(title: controllerTitle.text, date: controllerDate.text
                           , description: controllerDescription.text);
                       Navigator.pop(context);
-                      
+
                       createTutoring(tutor);
                     },
                     style: ElevatedButton.styleFrom(
@@ -169,6 +192,7 @@ class _TutorFormState extends State<TutorForm> {
       ),
     );
   }
+
   Future createTutoring(Tutor tutor) async{
     final docTutoring = FirebaseFirestore.instance.collection("tutoring").doc();
     tutor.id = docTutoring.id;
@@ -179,7 +203,7 @@ class _TutorFormState extends State<TutorForm> {
 }
 
 class Tutor {
-  String id;
+  String? id;
   final String title;
   final String date;
   final String description;
@@ -191,12 +215,17 @@ class Tutor {
     required this.description,
 });
 
-  Map<String, dynamic> toJson() {
-    return {
+  Map<String, dynamic> toJson() => {
     'id': id,
     'title': title,
     'date': date,
-  'description' : description,
+    'description' : description,
   };
-  }
+
+  static Tutor fromJson(Map<String, dynamic> json) => Tutor(
+    id: json['id'],
+    title: json['title'],
+    date: json['date'],
+    description: json['description']
+  );
 }

@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 class Tutors extends StatefulWidget {
   final String title;
-  final String time;
+  final String date;
   final String description;
 
 
-  const Tutors({Key? key, required this.title, required this.time, required this.description}) : super(key: key);
+  const Tutors({Key? key, required this.title, required this.date,  required this.description}) : super(key: key);
 
   @override
   State<Tutors> createState() => _TutorsState();
@@ -40,7 +40,7 @@ class _TutorsState extends State<Tutors> {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                      child: Text(widget.time /*"date"*/
+                      child: Text(widget.date /*"date"*/
                         ,style: const TextStyle(
                         color: Colors.white, fontSize: 10,
                       ), textAlign: TextAlign.end,

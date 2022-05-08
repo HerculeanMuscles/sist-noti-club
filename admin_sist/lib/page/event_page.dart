@@ -119,7 +119,7 @@ class _EventFormState extends State<EventForm> {
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.white, width: 2.0),
                     ),
-                    labelText: 'Imagebob',
+                    labelText: 'Image',
                     labelStyle: TextStyle(
                       color: Colors.white,
                     ),
