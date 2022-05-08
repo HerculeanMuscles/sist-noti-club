@@ -1,10 +1,16 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'page/event_page.dart';
 import 'page/tutor_page.dart';
 
-void main() => runApp(const MaterialApp(
-  home: Main(),
-));
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase. initializeApp();
+  FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+  runApp(const Main());
+}
 
 class Main extends StatefulWidget {
   const Main({Key? key}) : super(key: key);
@@ -21,32 +27,34 @@ class _MainState extends State<Main>{
   ];
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-    body: IndexedStack(
-      index: _currentIndex,
-      children: screens,
-    ),
-    bottomNavigationBar: BottomNavigationBar(
-      type: BottomNavigationBarType.fixed,
-      showSelectedLabels: false,
-      showUnselectedLabels: false,
-      backgroundColor: Colors.black,
-      selectedItemColor: const Color.fromRGBO(255, 255, 255, 1),
-      unselectedItemColor: const Color.fromRGBO(255, 255, 255, 69),
-      currentIndex: _currentIndex,
-      onTap: (value) {
-        setState(() => _currentIndex = value);
-      },
-      items: const [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.calendar_today_outlined),
-          label: 'Event',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.people_outline_rounded),
-          label: 'Tutoring',
-        ),
-      ],
+  Widget build(BuildContext context) => MaterialApp(
+    home: Scaffold(
+      body: IndexedStack(
+        index: _currentIndex,
+        children: screens,
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        backgroundColor: Colors.black,
+        selectedItemColor: const Color.fromRGBO(255, 255, 255, 1),
+        unselectedItemColor: const Color.fromRGBO(255, 255, 255, 69),
+        currentIndex: _currentIndex,
+        onTap: (value) {
+          setState(() => _currentIndex = value);
+        },
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.calendar_today_outlined),
+            label: 'Event',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.people_outline_rounded),
+            label: 'Tutoring',
+          ),
+        ],
+      ),
     ),
   );
 }

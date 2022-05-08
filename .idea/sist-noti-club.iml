@@ -13,6 +13,12 @@
       <excludeFolder url="file://$MODULE_DIR$/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/build" />
+      <excludeFolder url="file://$MODULE_DIR$/admin_sist/build" />
+      <excludeFolder url="file://$MODULE_DIR$/admin_sist/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/admin_sist/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/sistapp/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/sistapp/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/sistapp/build" />
     </content>
     <orderEntry type="jdk" jdkName="Android API 32 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />

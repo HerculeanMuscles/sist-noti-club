@@ -1,5 +1,9 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:admin_sist/page/tutoring.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+
 
 class TutorPage extends StatefulWidget {
   const TutorPage({Key? key}) : super(key: key);
@@ -10,7 +14,8 @@ class TutorPage extends StatefulWidget {
 
 class _TutorPageState extends State<TutorPage> {
   @override
-  Widget build(BuildContext context) => Scaffold(
+  Widget build(BuildContext context) => MaterialApp(
+  home:Scaffold(
   backgroundColor: const Color.fromRGBO(19, 22, 41, 1),
   appBar: AppBar(
   centerTitle: true,
@@ -48,10 +53,9 @@ class _TutorPageState extends State<TutorPage> {
         ),
       ],
     ),
+  )
   );
 }
-
-
 
 class TutorForm extends StatefulWidget {
   const TutorForm({Key? key}) : super(key: key);
@@ -61,6 +65,10 @@ class TutorForm extends StatefulWidget {
 }
 
 class _TutorFormState extends State<TutorForm> {
+  final controllerTitle = TextEditingController();
+  final controllerDate = TextEditingController();
+  final controllerDescription= TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,9 +86,10 @@ class _TutorFormState extends State<TutorForm> {
             children: [
               Container(
                 padding: const EdgeInsets.fromLTRB(10,10,10,10),
-                child: const TextField(
-                  style: TextStyle(color: Colors.white),
-                  decoration: InputDecoration(
+                child:  TextField(
+                  controller: controllerTitle,
+                  style: const TextStyle(color: Colors.white),
+                  decoration: const InputDecoration(
                     border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.blue, width: 2.0),
                     ),
@@ -96,11 +105,12 @@ class _TutorFormState extends State<TutorForm> {
               ),
               Container(
                 padding: const EdgeInsets.fromLTRB(10,10,10,10),
-                child: const TextField(
-                  style: TextStyle(color: Colors.white),
+                child: TextField(
+                  controller: controllerDescription,
+                  style: const TextStyle(color: Colors.white),
                   maxLines: 6,
                   minLines: 1,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.blue, width: 2.0),
                     ),
@@ -116,10 +126,11 @@ class _TutorFormState extends State<TutorForm> {
               ),
               Container(
                 padding: const EdgeInsets.fromLTRB(10,10,10,10),
-                child: const TextField(
-                  style: TextStyle(color: Colors.white),
+                child: TextField(
+                  controller: controllerDate,
+                  style: const TextStyle(color: Colors.white),
                   minLines: 1,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.blue, width: 2.0),
                     ),
@@ -136,7 +147,13 @@ class _TutorFormState extends State<TutorForm> {
               Container(
                 padding: const EdgeInsets.fromLTRB(10,10,10,10),
                 child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      final tutor = Tutor(title: controllerTitle.text, date: controllerDate.text
+                          , description: controllerDescription.text);
+                      Navigator.pop(context);
+                      
+                      createTutoring(tutor);
+                    },
                     style: ElevatedButton.styleFrom(
                       primary:  const Color.fromRGBO(120, 121, 241, 1),
                       padding:  const EdgeInsets.symmetric(horizontal: 90, vertical: 12),
@@ -151,5 +168,35 @@ class _TutorFormState extends State<TutorForm> {
         ],
       ),
     );
+  }
+  Future createTutoring(Tutor tutor) async{
+    final docTutoring = FirebaseFirestore.instance.collection("tutoring").doc();
+    tutor.id = docTutoring.id;
+
+    final json = tutor.toJson();
+    await docTutoring.set(json);
+  }
+}
+
+class Tutor {
+  String id;
+  final String title;
+  final String date;
+  final String description;
+
+  Tutor({
+    this.id ='',
+    required this.title,
+    required this.date,
+    required this.description,
+});
+
+  Map<String, dynamic> toJson() {
+    return {
+    'id': id,
+    'title': title,
+    'date': date,
+  'description' : description,
+  };
   }
 }
