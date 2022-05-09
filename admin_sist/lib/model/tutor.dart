@@ -1,13 +1,28 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Tutor {
-  String title;
-  String date;
-  String description;
+  String? id;
+  final String title;
+  final String date;
+  final String description;
 
-  Tutor.fromMap(Map<String, dynamic> data){
-    title = data['title'] ;
-    date = data['date'] ;
-    description = data['description'] ;
-  }
+  Tutor({
+    this.id ='',
+    required this.title,
+    required this.date,
+    required this.description,
+  });
+
+  Map<String, dynamic> toJson() => {
+    'id': id,
+    'title': title,
+    'date': date,
+    'description' : description,
+  };
+
+  static Tutor fromJson(Map<String, dynamic> json) => Tutor(
+      id: json['id'],
+      title: json['title'],
+      date: json['date'],
+      description: json['description']
+  );
 }

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:admin_sist/page/tutoring.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../model/tutor.dart';
+
 
 
 class TutorPage extends StatefulWidget {
@@ -200,32 +202,4 @@ class _TutorFormState extends State<TutorForm> {
     final json = tutor.toJson();
     await docTutoring.set(json);
   }
-}
-
-class Tutor {
-  String? id;
-  final String title;
-  final String date;
-  final String description;
-
-  Tutor({
-    this.id ='',
-    required this.title,
-    required this.date,
-    required this.description,
-});
-
-  Map<String, dynamic> toJson() => {
-    'id': id,
-    'title': title,
-    'date': date,
-    'description' : description,
-  };
-
-  static Tutor fromJson(Map<String, dynamic> json) => Tutor(
-    id: json['id'],
-    title: json['title'],
-    date: json['date'],
-    description: json['description']
-  );
 }
