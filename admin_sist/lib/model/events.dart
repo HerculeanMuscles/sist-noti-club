@@ -1,4 +1,3 @@
-
 class Events {
   String? id;
   final String title;

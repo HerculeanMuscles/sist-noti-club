@@ -23,6 +23,6 @@ class Tutor {
       id: json['id'],
       title: json['title'],
       date: json['date'],
-      description: json['description']
+      description: json['description'],
   );
 }
